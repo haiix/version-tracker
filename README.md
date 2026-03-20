@@ -1,4 +1,4 @@
-# version-tracker
+# Version Tracker
 
 Node.js の最新バージョン情報を自動で取得し、テキストファイルとして公開するリポジトリです。
 GitHub Actions により定期的に更新され、GitHub Pages を通じて簡易的な Web API として利用可能です。
