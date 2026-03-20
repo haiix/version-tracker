@@ -35,12 +35,14 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add nodejs/*.txt
 
-          # 変更がない場合はここで終了
-          git diff --quiet && git diff --staged --quiet || (
+          # 変更があるか確認
+          git add nodejs/*.txt
+          if ! git diff --staged --quiet; then
             git commit -m "Update Node.js versions: $(cat nodejs/lts.txt) / $(cat nodejs/current.txt)"
-            # push前に最新の状態を強制的にマージする
+            # 履歴を整理して最新の状態に合わせる
             git pull --rebase origin main
             git push origin main
-          )
+          else
+            echo "No changes to commit"
+          fi
