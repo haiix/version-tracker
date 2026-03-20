@@ -1,0 +1,34 @@
+name: Update Node.js Versions
+
+on:
+  schedule:
+    - cron: '18 23 * * *'
+  workflow_dispatch:
+
+jobs:
+  update-versions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Fetch Node.js Versions
+        run: |
+          # 公式JSONを一度取得
+          curl -s https://nodejs.org/dist/index.json > node_data.json
+
+          # LTSとCurrentを抽出
+          LATEST_LTS=$(cat node_data.json | jq -r '[.[] | select(.lts != false)][0].version')
+          LATEST_CURRENT=$(cat node_data.json | jq -r '.[0].version')
+
+          # フォルダを作成して保存
+          mkdir -p nodejs
+          echo "$LATEST_LTS" > nodejs/lts.txt
+          echo "$LATEST_CURRENT" > nodejs/current.txt
+
+      - name: Commit and Push if changed
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add nodejs/*.txt
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update Node.js versions: $(cat nodejs/lts.txt) / $(cat nodejs/current.txt)" && git push)
