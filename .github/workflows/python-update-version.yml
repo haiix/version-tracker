@@ -1,0 +1,46 @@
+name: Update Python Versions
+
+on:
+  schedule:
+    - cron: '48 22 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-versions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Fetch Python Versions
+        run: |
+          # endoflife.date の API を利用
+          curl -s https://endoflife.date/api/python.json > python_data.json
+
+          # 最新のマイナーバージョンの最新パッチを取得 (例: 3.13.x)
+          LATEST_STABLE=$(cat python_data.json | jq -r '.[0].latest')
+          
+          # 一つ前のマイナーバージョンの最新パッチを取得 (例: 3.12.x)
+          PREVIOUS_STABLE=$(cat python_data.json | jq -r '.[1].latest')
+
+          mkdir -p python
+          echo "$LATEST_STABLE" > python/latest.txt
+          echo "$PREVIOUS_STABLE" > python/stable.txt
+
+      - name: Commit and Push if changed
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add python/*.txt
+          
+          # 変更がある場合のみコミットとプッシュを実行
+          if ! git diff --cached --quiet; then
+            git commit -m "Update Python versions: $(cat python/latest.txt) / $(cat python/stable.txt)"
+            git pull --rebase origin main
+            git push origin main
+          else
+            echo "No changes to commit"
+          fi
