@@ -5,8 +5,6 @@ GitHub Actions で定期実行し、GitHub Pages を通じて軽量な Web API (
 
 ## 公開エンドポイント (Web API)
 
-各ツールの最新バージョンをプレーンテキストで取得できます。
-
 ### Node.js
 | 種類 | URL |
 | :--- | :--- |
