@@ -1,35 +1,31 @@
-# Version Tracker
+# Open Version Tracker
 
-Node.js の最新バージョン情報を自動で取得し、テキストファイルとして公開するリポジトリです。
-GitHub Actions により定期的に更新され、GitHub Pages を通じて簡易的な Web API として利用可能です。
+各種開発ツールの最新バージョンを自動取得し、テキストファイルとして公開するリポジトリです。
+GitHub Actions で定期実行し、GitHub Pages を通じて軽量な Web API (CORS対応) として提供します。
 
 ## 🚀 公開エンドポイント (Web API)
 
-ブラウザやスクリプトから直接 `fetch` して利用できます。
+各ツールの最新バージョンをプレーンテキストで取得できます。
 
-| 内容 | URL |
+### Node.js
+| 種類 | URL |
 | :--- | :--- |
-| **Latest LTS** | [https://haiix.github.io/version-tracker/nodejs/lts.txt](https://haiix.github.io/version-tracker/nodejs/lts.txt) |
-| **Latest Current** | [https://haiix.github.io/version-tracker/nodejs/current.txt](https://haiix.github.io/version-tracker/nodejs/current.txt) |
+| **LTS** | [https://user.github.io/version-tracker/nodejs/lts.txt](https://user.github.io/version-tracker/nodejs/lts.txt) |
+| **Current** | [https://user.github.io/version-tracker/nodejs/current.txt](https://user.github.io/version-tracker/nodejs/current.txt) |
 
 ## 🛠 仕組み
 
-1.  **自動更新**: GitHub Actions が毎日定刻（23:18 UTC）に実行されます。
-2.  **データ取得**: [nodejs.org](https://nodejs.org/dist/index.json) の公式JSONから最新バージョンを抽出します。
-3.  **自動保存**: バージョンに更新があった場合のみ、リポジトリ内の `nodejs/` フォルダへ自動コミット＆プッシュします。
-4.  **ホスティング**: GitHub Pages を通じて、常に最新のテキストデータが配信されます。
+1.  **自動クロール**: GitHub Actions が公式の配布元や API から最新情報を取得します。
+2.  **差分更新**: 取得したバージョンに更新がある場合のみ、リポジトリへ自動コミットします。
+3.  **配信**: GitHub Pages 上でホストされるため、`curl` や `fetch` を使ってサーバーレスでデータを取得可能です。
 
-## 📖 使い方 (JavaScript 例)
-
-CORSに対応しているため、フロントエンドから直接呼び出すことが可能です。
+## 📖 使い方 (JavaScript)
 
 ```javascript
-const getLtsVersion = async () => {
-  const res = await fetch('[https://haiix.github.io/version-tracker/nodejs/lts.txt](https://haiix.github.io/version-tracker/nodejs/lts.txt)');
-  const version = await res.text();
-  console.log(`Node.js LTS: ${version.trim()}`);
+// 例: Node.js の LTS バージョンを取得
+const fetchVersion = async () => {
+  const url = '[https://user.github.io/version-tracker/nodejs/lts.txt](https://user.github.io/version-tracker/nodejs/lts.txt)';
+  const response = await fetch(url);
+  const version = await response.text();
+  console.log(`Version: ${version.trim()}`);
 };
-```
-
-## License
-MIT License
