@@ -10,8 +10,8 @@ GitHub Actions で定期実行し、GitHub Pages を通じて軽量な Web API (
 ### Node.js
 | 種類 | URL |
 | :--- | :--- |
-| **LTS** | [https://user.github.io/version-tracker/nodejs/lts.txt](https://user.github.io/version-tracker/nodejs/lts.txt) |
-| **Current** | [https://user.github.io/version-tracker/nodejs/current.txt](https://user.github.io/version-tracker/nodejs/current.txt) |
+| **LTS** | [https://haiix.github.io/version-tracker/nodejs/lts.txt](https://haiix.github.io/version-tracker/nodejs/lts.txt) |
+| **Current** | [https://haiix.github.io/version-tracker/nodejs/current.txt](https://haiix.github.io/version-tracker/nodejs/current.txt) |
 
 ## 🛠 仕組み
 
@@ -24,7 +24,7 @@ GitHub Actions で定期実行し、GitHub Pages を通じて軽量な Web API (
 ```javascript
 // 例: Node.js の LTS バージョンを取得
 const fetchVersion = async () => {
-  const url = '[https://user.github.io/version-tracker/nodejs/lts.txt](https://user.github.io/version-tracker/nodejs/lts.txt)';
+  const url = '[https://haiix.github.io/version-tracker/nodejs/lts.txt](https://user.github.io/version-tracker/nodejs/lts.txt)';
   const response = await fetch(url);
   const version = await response.text();
   console.log(`Version: ${version.trim()}`);
