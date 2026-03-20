@@ -43,7 +43,3 @@ jobs:
           else
             echo "No changes to commit"
           fi
-
-          title: "chore: update Node.js version data"
-          body: "Node.jsの公式サイトから最新のLTSとCurrentのバージョンを取得しました。"
-          delete-branch: true             # マージ後にブランチを削除
