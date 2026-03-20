@@ -29,14 +29,20 @@ jobs:
           echo "$LATEST_LTS" > nodejs/lts.txt
           echo "$LATEST_CURRENT" > nodejs/current.txt
 
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v6
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "Update Node.js versions: $(cat nodejs/lts.txt) / $(cat nodejs/current.txt)"
-          committer: GitHub Action <action@github.com>
-          author: GitHub Action <action@github.com>
-          branch: update-nodejs-versions  # PR用の作業ブランチ名
+      - name: Commit and Push if changed
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add nodejs/*.txt
+          
+          # 変更がない場合はここで終了
+          git diff --quiet && git diff --staged --quiet || (
+            git commit -m "Update Node.js versions: $(cat nodejs/lts.txt) / $(cat nodejs/current.txt)"
+            # push前に最新の状態を強制的にマージする
+            git pull --rebase origin main
+            git push origin main
+          )
+
           title: "chore: update Node.js version data"
           body: "Node.jsの公式サイトから最新のLTSとCurrentのバージョンを取得しました。"
           delete-branch: true             # マージ後にブランチを削除
