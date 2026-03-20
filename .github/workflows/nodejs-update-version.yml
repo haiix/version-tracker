@@ -14,8 +14,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
 
       - name: Fetch Node.js Versions
         run: |
@@ -31,19 +29,14 @@ jobs:
           echo "$LATEST_LTS" > nodejs/lts.txt
           echo "$LATEST_CURRENT" > nodejs/current.txt
 
-      - name: Commit and Push if changed
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-
-          # 変更があるか確認
-          git add nodejs/*.txt
-          if ! git diff --staged --quiet; then
-            git commit -m "Update Node.js versions: $(cat nodejs/lts.txt) / $(cat nodejs/current.txt)"
-            # 履歴を整理して最新の状態に合わせる
-            git push --force origin main
-            #git pull --rebase origin main
-            #git push origin main
-          else
-            echo "No changes to commit"
-          fi
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Update Node.js versions: $(cat nodejs/lts.txt) / $(cat nodejs/current.txt)"
+          committer: GitHub Action <action@github.com>
+          author: GitHub Action <action@github.com>
+          branch: update-nodejs-versions  # PR用の作業ブランチ名
+          title: "chore: update Node.js version data"
+          body: "Node.jsの公式サイトから最新のLTSとCurrentのバージョンを取得しました。"
+          delete-branch: true             # マージ後にブランチを削除
