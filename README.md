@@ -1,4 +1,4 @@
-# Open Version Tracker
+# Version Tracker
 
 各種開発ツールの最新バージョンを自動取得し、テキストファイルとして公開するリポジトリです。
 GitHub Actions で定期実行し、GitHub Pages を通じて軽量な Web API (CORS対応) として提供します。
