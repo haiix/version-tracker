@@ -13,12 +13,6 @@ GitHub Actions で定期実行し、GitHub Pages を通じて軽量な Web API (
 | **LTS** | [https://haiix.github.io/version-tracker/nodejs/lts.txt](https://haiix.github.io/version-tracker/nodejs/lts.txt) |
 | **Current** | [https://haiix.github.io/version-tracker/nodejs/current.txt](https://haiix.github.io/version-tracker/nodejs/current.txt) |
 
-## 🛠 仕組み
-
-1.  **自動クロール**: GitHub Actions が公式の配布元や API から最新情報を取得します。
-2.  **差分更新**: 取得したバージョンに更新がある場合のみ、リポジトリへ自動コミットします。
-3.  **配信**: GitHub Pages 上でホストされるため、`curl` や `fetch` を使ってサーバーレスでデータを取得可能です。
-
 ## 📖 使い方 (JavaScript)
 
 ```javascript
