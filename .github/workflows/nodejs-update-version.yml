@@ -41,8 +41,9 @@ jobs:
           if ! git diff --staged --quiet; then
             git commit -m "Update Node.js versions: $(cat nodejs/lts.txt) / $(cat nodejs/current.txt)"
             # 履歴を整理して最新の状態に合わせる
-            git pull --rebase origin main
-            git push origin main
+            git push --force origin main
+            #git pull --rebase origin main
+            #git push origin main
           else
             echo "No changes to commit"
           fi
