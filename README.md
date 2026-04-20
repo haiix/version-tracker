@@ -19,5 +19,5 @@ GitHub Actions で定期実行し、GitHub Pages を通じて軽量な Web API (
 ### Git
 | 種類 | URL |
 | :--- | :--- |
+| **Latest Stable** | [https://haiix.github.io/version-tracker/git/stable.txt](https://haiix.github.io/version-tracker/git/stable.txt) |
 | **RC** | [https://haiix.github.io/version-tracker/git/rc.txt](https://haiix.github.io/version-tracker/git/rc.txt) |
-| **Stable** | [https://haiix.github.io/version-tracker/git/stable.txt](https://haiix.github.io/version-tracker/git/stable.txt) |
