@@ -22,12 +22,12 @@ jobs:
           # 最新のRC版（例: v2.54.0-rc2）
           LATEST_RC=$(jq -r '[.[] 
             | select(.name | test("-rc[0-9]+$"))
-          ][0].name' tags.json | sed 's/^v//')
+          ][0].name' tags.json)
 
           # 最新の安定版（例: v2.53.0）
           LATEST_STABLE=$(jq -r '[.[] 
             | select(.name | test("^v[0-9]+\\.[0-9]+\\.[0-9]+$"))
-          ][0].name' tags.json | sed 's/^v//')
+          ][0].name' tags.json)
 
           mkdir -p git
           echo "$LATEST_RC" > git/rc.txt
