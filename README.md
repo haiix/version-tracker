@@ -9,7 +9,7 @@ GitHub Actions で定期実行し、GitHub Pages を通じて軽量な Web API (
 | 種類 | URL |
 | :--- | :--- |
 | **LTS** | [https://haiix.github.io/version-tracker/nodejs/lts.txt](https://haiix.github.io/version-tracker/nodejs/lts.txt) |
-| **Current** | [https://haiix.github.io/version-tracker/nodejs/current.txt](https://haiix.github.io/version-tracker/nodejs/current.txt) |
+| Current | [https://haiix.github.io/version-tracker/nodejs/current.txt](https://haiix.github.io/version-tracker/nodejs/current.txt) |
 
 ### Python
 | 種類 | URL |
@@ -20,4 +20,4 @@ GitHub Actions で定期実行し、GitHub Pages を通じて軽量な Web API (
 | 種類 | URL |
 | :--- | :--- |
 | **Latest Stable** | [https://haiix.github.io/version-tracker/git/stable.txt](https://haiix.github.io/version-tracker/git/stable.txt) |
-| **RC** | [https://haiix.github.io/version-tracker/git/rc.txt](https://haiix.github.io/version-tracker/git/rc.txt) |
+| RC | [https://haiix.github.io/version-tracker/git/rc.txt](https://haiix.github.io/version-tracker/git/rc.txt) |
